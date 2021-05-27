@@ -30,23 +30,23 @@ control_capas = L.control.layers(capas_base).addTo(mapa);
 // Control de escala
 L.control.scale().addTo(mapa);
 
-// Capa raster de amenaza de inundacion en formato GeoJSON
-$.getJSON("https://dvictoria2020.github.io/tarea-2/datos/rios/amenaza_inundacion.geojson", function(geodata) {
-  var amenaza_inundacion = L.geoJson(geodata, {
+// Capa vectorial de terrenos del estado en formato GeoJSON
+$.getJSON("https://dvictoria2020.github.io/tarea-3/tarea-3/datos/terrenos/terrenos_estado.geojson", function(geodata) {
+  var terrenos = L.geoJson(geodata, {
     style: function(feature) {
-	  return {'color': "#4682b4", 'weight': 3, 'fillOpacity': 0.0}
+	  return {'color': "red", 'weight': 1.5, 'fillOpacity': 0.0}
     },
     onEachFeature: function(feature, layer) {
-      var popupText = "<strong>Descripción de la amenaza</strong>: " + feature.properties.Descrip;
+      var popupText = "<strong>Propietario</strong>: " + feature.properties.nom_juridi + "<br>" + "<strong>Tipo de Inmueble</strong>: " + feature.properties.t_inmueb + "<br>" + "<strong>Clasificación</strong>: " + feature.properties.clasific + "<br>" + "<strong>Amenazas</strong>: " + feature.properties.r_fisica + "<br>" + "<strong>Número de finca</strong>: " + feature.properties.finca;
       layer.bindPopup(popupText);
     }			
   }).addTo(mapa);
 
-  control_capas.addOverlay(amenaza_inundacion,'Amenaza de inundación');
+  control_capas.addOverlay(terrenos, 'Terrenos del Estado');
 });
 
 // Capa vectorial de terrenos del estado en formato GeoJSON
-$.getJSON("https://dvictoria2020.github.io/tarea-3/tarea-3/datos/terrenos/terrenos_estado.geojson", function(geodata) {
+$.getJSON("https://dvictoria2020.github.io/tarea-3/tarea-3/datos/terrenos/terrenos_estado2.geojson", function(geodata) {
   var terrenos = L.geoJson(geodata, {
     style: function(feature) {
 	  return {'color': "red", 'weight': 1.5, 'fillOpacity': 0.0}
