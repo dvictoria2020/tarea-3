@@ -30,38 +30,7 @@ control_capas = L.control.layers(capas_base).addTo(mapa);
 // Control de escala
 L.control.scale().addTo(mapa);
 
-// Capa vectorial de centroides de los distritos en formato GeoJSON
-
-$.getJSON("https://dvictoria2020.github.io/tarea-2/datos/centroide/distritos_p.geojson", function(geodata) {
-  var capa_distritos_p = L.geoJson(geodata, {
-    style: function(feature) {
-	  return {'color': "grey", 'weight': 1.5, 'fillOpacity': 0.0}
-    },
-    onEachFeature: function(feature, layer) {
-      var popupText = "<strong>Distrito</strong>: " + feature.properties.distrito + "<br>" + "<strong>Provincia</strong>: " + feature.properties.canton;
-      layer.bindPopup(popupText);
-    }			
-  }).addTo(mapa);
-
-  control_capas.addOverlay(capa_distritos_p, 'Distritos');
-});
-
-// Capa vectorial de rios en formato GeoJSON
-$.getJSON("https://dvictoria2020.github.io/tarea-2/datos/rios/rios.geojson", function(geodata) {
-  var rios = L.geoJson(geodata, {
-    style: function(feature) {
-	  return {'color': "darkblue", 'weight': 1.5, 'fillOpacity': 0.0}
-    },
-    onEachFeature: function(feature, layer) {
-      var popupText = "<strong>Nombre del río</strong>: " + feature.properties.NOMBRE;
-      layer.bindPopup(popupText);
-    }			
-  }).addTo(mapa);
-
-  control_capas.addOverlay(rios,'Red hídrica');
-});
-
-// Capa vectorial de amenaza de inundacion en formato GeoJSON
+// Capa raster de amenaza de inundacion en formato GeoJSON
 $.getJSON("https://dvictoria2020.github.io/tarea-2/datos/rios/amenaza_inundacion.geojson", function(geodata) {
   var amenaza_inundacion = L.geoJson(geodata, {
     style: function(feature) {
@@ -77,7 +46,7 @@ $.getJSON("https://dvictoria2020.github.io/tarea-2/datos/rios/amenaza_inundacion
 });
 
 // Capa vectorial de terrenos del estado en formato GeoJSON
-$.getJSON("https://dvictoria2020.github.io/tarea-2/datos/terrenos/terrenos_estado.geojson", function(geodata) {
+$.getJSON("https://dvictoria2020.github.io/tarea-3/tarea-3/datos/terrenos/terrenos_estado.geojson", function(geodata) {
   var terrenos = L.geoJson(geodata, {
     style: function(feature) {
 	  return {'color': "red", 'weight': 1.5, 'fillOpacity': 0.0}
@@ -90,3 +59,13 @@ $.getJSON("https://dvictoria2020.github.io/tarea-2/datos/terrenos/terrenos_estad
 
   control_capas.addOverlay(terrenos, 'Terrenos del Estado');
 });
+
+// Agregar capa WMS Asentamientos Informales
+  var capa_localidades = L.tileLayer.wms('http://mapassociales.inec.cr/geopc?service=wms', {
+  layers: 'localidades_02012017',
+  format: 'image/png',
+  transparent: true
+}).addTo(mapa);
+
+// Se agrega al control de capas como de tipo "overlay"
+control_capas.addOverlay(capa_localidades, 'Localidades de Costa Rica WMS');
