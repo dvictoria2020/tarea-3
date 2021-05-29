@@ -12,16 +12,23 @@
     
     <!-- Enlace a biblioteca JavaScript de Leaflet -->
     <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js" integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA==" crossorigin=""></script>    
+    
+    <!-- Enlace a complemento Leaflet-choropleth -->
+    <script src="js/choropleth.js"></script> 
 
     <link rel="stylesheet" href="css/estilos.css">
 </head>
 <body>
-    <h1>Terrenos del Estado en los distritos: Hatillo, Pavas y Uruca, cantón de San José, Costa Rica</h1>     
+    <h1>Terrenos del Estado en los distritos: Hatillo, Pavas, Uruca del cantón de San José y estimación del área</h1>     
     
     <!-- Elemento div para contener el mapa Leaflet -->
     <div id="mapid"></div>
 
     <!-- Código JavaScript para generar y manejar el mapa Leaflet -->
-    <script src="js/scripts.js"></script>					
+    <script src="js/scripts.js"></script>	
+
+    <!-- Controles para la opacidad de la deficit habitacional -->
+    <h5>Opacidad de la capa de Deficit Habitacional: <span id="span-opacity-Def">0.5</span></h5>
+    <input type='range' id='sld-opacity-Def' min='0' max='1' step='0.1' value='0.5' onchange='updateOpacityDef();'>				
 </body>
 </html>	
