@@ -61,11 +61,15 @@ $.getJSON("https://dvictoria2020.github.io/tarea-3/tarea-3/datos/terrenos/terren
 });
 
 // Agregar capa WMS Asentamientos Informales
-  var capa_localidades = L.tileLayer.wms('http://mapassociales.inec.cr/geopc?service=wms', {
-  layers: 'localidades_02012017',
+var capa_asentamientos_informales = L.tileLayer.wms('https://sig.mivah.go.cr/server/services/cit/AsentamientosInformales/MapServer/WmsServer?', {
+  layers: 'AsentamientosInformales',
   format: 'image/png',
-  transparent: true
+  transparent: true,
+  opacity: 0.4
 }).addTo(mapa);
+
+// Se agrega al control de capas como de tipo "overlay"
+control_capas.addOverlay(capa_asentamientos_informales, 'Asentamientos de Costa Rica WMS');
 
 // Se agrega al control de capas como de tipo "overlay"
 control_capas.addOverlay(capa_localidades, 'Localidades de Costa Rica WMS');
