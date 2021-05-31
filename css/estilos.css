@@ -1,3 +1,13 @@
+/*titulo terreno*/
+h1{
+	padding: 20px;
+	text-align: center;
+	background: #1a73bc;
+	color: white;
+	font-size: 30px;
+}
+
+
 #mapid { 
     height: 750px;
     width: auto;

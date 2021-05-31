@@ -1,5 +1,5 @@
 // Mapa Leaflet
-var mapa = L.map('mapid').setView([9.94, -84.13], 13);
+var mapa = L.map('mapid').setView([9.94, -84.13], 14);
 
 // Definición de capas base
 var capa_osm = L.tileLayer(
@@ -39,7 +39,7 @@ control_capas = L.control.layers(capas_base).addTo(mapa);
 // Control de escala
 L.control.scale().addTo(mapa);
 
-// Capa de coropletas  terrenos del estado en formato GeoJSON
+// Capa de coropletas sobre terrenos del estado en formato GeoJSON
 $.getJSON('https://dvictoria2020.github.io/tarea-3/datos/terrenos/terrenos_estado.geojson', function (geojson) {
   var capa_terrenos = L.choropleth(geojson, {
 	    valueProperty: 'area',
@@ -58,7 +58,7 @@ $.getJSON('https://dvictoria2020.github.io/tarea-3/datos/terrenos/terrenos_estad
   }).addTo(mapa);
   control_capas.addOverlay(capa_terrenos, 'Terrenos del Estado');
 
-  // Leyenda de la capa de coropletas
+  // Leyenda de la capa de coropletas sobre terrenos del estado
   var leyenda = L.control({ position: 'bottomleft' })
   leyenda.onAdd = function (mapa) {
     var div = L.DomUtil.create('div', 'info legend')
